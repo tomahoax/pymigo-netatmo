@@ -1,0 +1,406 @@
+openapi: 3.0.3
+info:
+  title: MiGO Netatmo API (observed, unofficial)
+  version: 0.1.0
+servers:
+- url: https://app.netatmo.net
+paths:
+  /oauth2/token:
+    post:
+      operationId: token
+      summary: Exchange OAuth credentials
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - client_id
+              - client_secret
+              - grant_type
+              properties:
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+                grant_type:
+                  type: string
+                  enum:
+                  - password
+                  - refresh_token
+                username:
+                  type: string
+                password:
+                  type: string
+                refresh_token:
+                  type: string
+                scope:
+                  type: string
+                user_prefix:
+                  type: string
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /api/homesdata:
+    post:
+      operationId: homesdata
+      summary: homesdata
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /api/homestatus:
+    post:
+      operationId: homestatus
+      summary: homestatus
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /api/setstate:
+    post:
+      operationId: setstate
+      summary: setstate
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /api/sethomedata:
+    post:
+      operationId: sethomedata
+      summary: sethomedata
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /api/switchhomeschedule:
+    post:
+      operationId: switchhomeschedule
+      summary: switchhomeschedule
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /api/changeheatingcurve:
+    post:
+      operationId: changeheatingcurve
+      summary: changeheatingcurve
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /api/setheatingsystem:
+    post:
+      operationId: setheatingsystem
+      summary: setheatingsystem
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /syncapi/v1/setconfigs:
+    post:
+      operationId: setconfigs
+      summary: setconfigs
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /api/changeheatingalgo:
+    post:
+      operationId: changeheatingalgo
+      summary: changeheatingalgo
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /api/getmeasure:
+    post:
+      operationId: getmeasure
+      summary: getmeasure
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+  /syncapi/v1/getconfigs:
+    post:
+      operationId: getconfigs
+      summary: getconfigs
+      description: Unofficial MiGO endpoint. Unknown fields are retained by the client.
+        See docs/api/reference.md for observed payloads.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Backend JSON payload
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Request rejected
+        '401':
+          description: Authentication rejected
+        '429':
+          description: Rate limited
+        '500':
+          description: Backend failure
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

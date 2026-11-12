@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pymigo-netatmo"
+dynamic = ["version"]
+description = "Async client for the MiGO Netatmo thermostat API"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [{name = "tomahoax"}]
+dependencies = ["aiohttp>=3.10.7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.24", "pytest-cov>=4", "ruff>=0.6", "mypy>=1.11", "pyyaml>=6"]
+
+[project.scripts]
+pymigo-netatmo = "pymigo_netatmo.cli:main"
+
+[tool.hatch.version]
+path = "src/pymigo_netatmo/const/__init__.py"
+pattern = 'VERSION: Final = "(?P<version>[^\"]+)"'
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pymigo_netatmo"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+
+[tool.coverage.run]
+source = ["pymigo_netatmo"]
+
+[tool.coverage.report]
+fail_under = 90
+exclude_lines = ["if TYPE_CHECKING:", "if __name__ == .__main__.:"]

@@ -1,0 +1,109 @@
+{
+  "homes": {
+    "home_123": {
+      "id": "home_123",
+      "name": "My Home",
+      "therm_mode": "schedule",
+      "coordinates": [
+        49.123456,
+        2.654321
+      ],
+      "city": "Somewhere",
+      "country": "FR",
+      "altitude": 120,
+      "timezone": "Europe/Paris",
+      "invitation_code": [
+        "ZsdApbpjOstMdOn1"
+      ],
+      "rooms": [
+        {
+          "id": "room_456",
+          "name": "Living Room",
+          "type": "living_room",
+          "module_ids": [
+            "module_789"
+          ]
+        }
+      ],
+      "modules": [
+        {
+          "id": "gateway_001",
+          "type": "NAVaillant",
+          "subtype": "NAEbusSdbg",
+          "oem_serial": "SN123456"
+        },
+        {
+          "id": "module_789",
+          "type": "NAThermVaillant",
+          "room_id": "room_456",
+          "bridge": "gateway_001"
+        }
+      ],
+      "schedules": [
+        {
+          "id": "schedule_001",
+          "name": "Default",
+          "type": "therm",
+          "selected": true,
+          "default": true
+        }
+      ]
+    }
+  },
+  "rooms": {
+    "room_456": {
+      "id": "room_456",
+      "name": "Living Room",
+      "type": "living_room",
+      "module_ids": [
+        "module_789"
+      ],
+      "therm_measured_temperature": 21.5,
+      "therm_setpoint_temperature": 20.0,
+      "therm_setpoint_mode": "schedule",
+      "reachable": true,
+      "anticipating": false,
+      "home_id": "home_123",
+      "home_name": "My Home"
+    }
+  },
+  "devices": {
+    "gateway_001": {
+      "id": "gateway_001",
+      "type": "NAVaillant",
+      "subtype": "NAEbusSdbg",
+      "oem_serial": "SN123456",
+      "dhw_setpoint_temperature": 55,
+      "wifi_strength": 70,
+      "firmware_revision": 1030,
+      "dhw_enabled": true,
+      "ebus_error": false,
+      "boiler_error": [],
+      "home_id": "home_123"
+    },
+    "module_789": {
+      "id": "module_789",
+      "type": "NAThermVaillant",
+      "room_id": "room_456",
+      "bridge": "gateway_001",
+      "battery_percent": 85,
+      "battery_state": "high",
+      "rf_strength": 65,
+      "firmware_revision": 72,
+      "reachable": true,
+      "boiler_status": true,
+      "home_id": "home_123"
+    }
+  },
+  "consumption": {
+    "gateway_001": {
+      "timestamp": 1704240000,
+      "sum_boiler_on": 5400,
+      "sum_boiler_off": 81000,
+      "sum_energy_gaz_heating": 18000,
+      "sum_energy_gaz_hot_water": 2000,
+      "sum_energy_elec_heating": 150,
+      "sum_energy_elec_hot_water": 75
+    }
+  }
+}

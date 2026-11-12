@@ -1,0 +1,23 @@
+"""Device setting limits."""
+
+from typing import Final
+
+MODE_MAX: Final = "max"
+TEMP_MIN: Final = 7.0
+TEMP_MAX: Final = 30.0
+TEMP_STEP: Final = 0.5
+MANUAL_SETPOINT_DURATION_MIN: Final = 5
+MANUAL_SETPOINT_DURATION_MAX: Final = 720
+MANUAL_SETPOINT_DURATION_STEP: Final = 5
+TEMP_OFFSET_MIN: Final = -5.0
+TEMP_OFFSET_MAX: Final = 5.0
+TEMP_OFFSET_STEP: Final = 0.5
+DHW_TEMP_MIN: Final = 45
+DHW_TEMP_MAX: Final = 60
+DHW_TEMP_STEP: Final = 1
+HYSTERESIS_MIN: Final = 0.1
+HYSTERESIS_MAX: Final = 2.0
+HYSTERESIS_STEP: Final = 0.1
+HEATING_CURVE_MIN: Final = 0.0
+HEATING_CURVE_MAX: Final = 5.0
+HEATING_CURVE_STEP: Final = 0.1
