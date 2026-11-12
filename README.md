@@ -22,7 +22,9 @@ async def read(username, password):
 ```
 
 `ensure_authenticated()` loads persisted refresh tokens before using password login.
-`authenticate()` explicitly validates the supplied password. The caller owns an
+An explicit refresh rejection (HTTP 400 or 401) falls back once to the supplied
+password. Network errors, rate limits and server outages never trigger password
+recovery. `authenticate()` explicitly validates the supplied password. The caller owns an
 injected session. `close()` only closes sessions created by the client itself.
 
 ## Control a home

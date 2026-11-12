@@ -76,15 +76,24 @@ class AuthMixin:
     async def refresh_access_token(self) -> bool:
         if not self._refresh_token:
             return await self.authenticate()
-        return await self._exchange(
-            {
-                "client_id": self._client_id,
-                "client_secret": self._client_secret,
-                "grant_type": GRANT_TYPE_REFRESH,
-                "refresh_token": self._refresh_token,
-            },
-            preserve_refresh=True,
-        )
+        try:
+            return await self._exchange(
+                {
+                    "client_id": self._client_id,
+                    "client_secret": self._client_secret,
+                    "grant_type": GRANT_TYPE_REFRESH,
+                    "refresh_token": self._refresh_token,
+                },
+                preserve_refresh=True,
+            )
+        except MigoAuthError as err:
+            # Only an explicit token rejection permits a password recovery.
+            # Network errors, rate limits and backend outages remain retryable.
+            if err.code not in {400, 401}:
+                raise
+            self._refresh_token = None
+            await self._token_store.save(None)
+            return await self.authenticate()
 
     def _store_tokens(self, token_data: dict[str, Any], preserve_refresh: bool = False) -> None:
         access = token_data.get("access_token")

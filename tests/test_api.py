@@ -126,8 +126,8 @@ class TestMigoApiTokenRefresh:
         assert api._refresh_token == "existing_refresh_token"
 
     @pytest.mark.asyncio
-    async def test_refresh_rejection_requires_reauthentication(self, token_response) -> None:
-        """A rejected refresh must not silently retry the account password."""
+    async def test_refresh_rejection_recovers_with_password(self, token_response) -> None:
+        """A rejected refresh token recovers using the stored account password."""
         mock_session = MagicMock()
         mock_session.closed = False
         mock_session.post.side_effect = [
@@ -137,9 +137,9 @@ class TestMigoApiTokenRefresh:
         api = self._make_api(mock_session)
         api._refresh_token = "existing_refresh_token"
 
-        with pytest.raises(MigoAuthError):
-            await api.refresh_access_token()
-        assert mock_session.post.call_count == 1
+        assert await api.refresh_access_token()
+        assert api._access_token == "test_access_token"
+        assert mock_session.post.call_count == 2
 
     @pytest.mark.asyncio
     async def test_refresh_connection_error_preserves_session_error(self, token_response) -> None:
