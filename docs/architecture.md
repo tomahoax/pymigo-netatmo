@@ -30,7 +30,7 @@ flowchart LR
 | `const` | Wire values, semantic enums and limits |
 | `tokens` | Async persistence protocol, memory and private file stores |
 | `testing` | Offline fake for consumers |
-| `cli` | Read-only account inspection |
+| `cli` | Command line over the `system` façade: account reads and confirmed writes, see [command line reference](cli.md) |
 
 Snapshot assembly merges static configuration, module configuration and live status
 in that order. Missing optional reads retain the account where possible. Authentication

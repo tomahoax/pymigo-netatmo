@@ -53,7 +53,13 @@ class MigoAccount:
     def home(self, home_id: str) -> MigoHome:
         return MigoHome(self.client, home_id)
 
-    async def read_snapshot(self) -> AccountSnapshot:
+    async def read_snapshot(self, *, consumption: bool = True) -> AccountSnapshot:
+        """Read homes, rooms and modules, and by default the latest daily consumption.
+
+        With `consumption=False`, the one `getmeasure` request per gateway is skipped and the
+        snapshot keeps whatever consumption this account object already holds, which is nothing
+        on a first read. Use it when the readings are not needed.
+        """
         response = await self.client.get_homes_data()
         body = response.get("body")
         if not isinstance(body, dict):
@@ -107,6 +113,8 @@ class MigoAccount:
                             "home_id": home_id,
                         }
                     )
+        if not consumption:
+            return AccountSnapshot(homes, rooms, devices, dict(self._consumption))
         for device_id, device in devices.items():
             if device.get("type") != "NAVaillant":
                 continue
