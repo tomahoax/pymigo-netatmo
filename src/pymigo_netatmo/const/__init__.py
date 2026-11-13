@@ -8,4 +8,4 @@ from .semantics import HeatingAlgorithm as HeatingAlgorithm
 from .semantics import ThermMode as ThermMode
 from .wire import *  # noqa: F403
 
-VERSION: Final = "0.1.0"
+VERSION: Final = "0.2.0"
